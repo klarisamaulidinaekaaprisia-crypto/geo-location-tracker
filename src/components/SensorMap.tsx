@@ -42,8 +42,6 @@ export default function SensorMap({ sensors, selectedId, onSelect }: SensorMapPr
       maxZoom: 19,
     }).addTo(map);
     mapRef.current = map;
-    // Pastikan ukuran peta benar setelah tata letak selesai (penting di mobile).
-    setTimeout(() => map.invalidateSize(), 100);
     return () => {
       map.remove();
       mapRef.current = null;
