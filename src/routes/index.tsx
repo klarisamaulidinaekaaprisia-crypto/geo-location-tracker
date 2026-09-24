@@ -197,23 +197,25 @@ function Index() {
 
         {/* Peta */}
         <section className="animate-fade-in relative order-1 h-[46vh] min-h-[320px] flex-1 overflow-hidden rounded-3xl bg-white shadow-[0_1px_3px_rgba(0,0,0,0.05)] ring-1 ring-black/5 sm:h-[52vh] lg:order-2 lg:h-auto lg:min-h-[560px]">
-          <ClientOnly
-            fallback={
-              <div className="flex h-full items-center justify-center text-[13px] text-neutral-400">
-                Memuat peta…
-              </div>
-            }
-          >
-            <Suspense
+          <div className="absolute inset-0">
+            <ClientOnly
               fallback={
                 <div className="flex h-full items-center justify-center text-[13px] text-neutral-400">
                   Memuat peta…
                 </div>
               }
             >
-              <SensorMap sensors={sensors} selectedId={selected?.id ?? null} onSelect={handleSelect} />
-            </Suspense>
-          </ClientOnly>
+              <Suspense
+                fallback={
+                  <div className="flex h-full items-center justify-center text-[13px] text-neutral-400">
+                    Memuat peta…
+                  </div>
+                }
+              >
+                <SensorMap sensors={sensors} selectedId={selected?.id ?? null} onSelect={handleSelect} />
+              </Suspense>
+            </ClientOnly>
+          </div>
           {selected && (
             <div className="absolute bottom-4 left-4 right-4 z-[1000] flex items-center justify-between rounded-2xl bg-white/85 px-4 py-3 shadow-[0_4px_20px_rgba(0,0,0,0.08)] ring-1 ring-black/5 backdrop-blur-xl sm:right-auto">
               <div>
