@@ -42,93 +42,115 @@ function Index() {
   const selected = sensors.find((s) => s.id === selectedId) ?? sensors[0];
 
   return (
-    <div className="flex min-h-screen flex-col bg-slate-950 text-slate-100">
-      <header className="flex items-center justify-between border-b border-slate-800 px-6 py-4">
-        <div>
-          <h1 className="text-lg font-semibold tracking-tight">Peta Pemantauan Sensor</h1>
-          <p className="text-xs text-slate-400">
-            Lokasi latitude &amp; longitude sensor fisik, diperbarui setiap 3 detik
-          </p>
-        </div>
-        <div className="flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 text-xs text-emerald-300">
-          <span className="h-2 w-2 animate-pulse rounded-full bg-emerald-400" />
-          Live
+    <div
+      className="flex min-h-screen flex-col bg-[#f5f5f7] text-neutral-900 antialiased"
+      style={{
+        fontFamily:
+          "-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Arial, sans-serif",
+      }}
+    >
+      <header className="sticky top-0 z-[1100] border-b border-black/5 bg-white/70 backdrop-blur-xl">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+          <div>
+            <h1 className="text-[17px] font-semibold tracking-tight">Peta Sensor</h1>
+            <p className="text-[12px] text-neutral-500">
+              Lokasi sensor fisik, diperbarui setiap 3 detik
+            </p>
+          </div>
+          <div className="flex items-center gap-1.5 rounded-full bg-emerald-50 px-3 py-1 text-[12px] font-medium text-emerald-600 ring-1 ring-emerald-600/10">
+            <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-500" />
+            Live
+          </div>
         </div>
       </header>
 
-      <main className="flex flex-1 flex-col gap-4 p-4 lg:flex-row">
-        <aside className="flex w-full flex-col gap-3 lg:w-80">
+      <main className="mx-auto flex w-full max-w-7xl flex-1 flex-col gap-5 p-5 lg:flex-row">
+        <aside className="flex w-full flex-col gap-3 lg:w-[340px]">
           {sensors.map((sensor) => (
             <button
               key={sensor.id}
               onClick={() => setSelectedId(sensor.id)}
-              className={`rounded-xl border p-4 text-left transition-colors ${
+              className={`rounded-2xl bg-white p-5 text-left shadow-[0_1px_2px_rgba(0,0,0,0.04)] ring-1 transition-all duration-200 ${
                 sensor.id === selected?.id
-                  ? "border-sky-500/60 bg-sky-500/10"
-                  : "border-slate-800 bg-slate-900 hover:border-slate-700"
+                  ? "ring-2 ring-blue-500"
+                  : "ring-black/5 hover:shadow-[0_4px_16px_rgba(0,0,0,0.06)]"
               }`}
             >
               <div className="flex items-center justify-between">
-                <span className="text-sm font-medium">{sensor.name}</span>
+                <span className="text-[14px] font-semibold tracking-tight">{sensor.name}</span>
                 <span
-                  className={`rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase ${
+                  className={`rounded-full px-2 py-0.5 text-[10px] font-semibold ${
                     sensor.status === "online"
-                      ? "bg-emerald-500/15 text-emerald-300"
-                      : "bg-rose-500/15 text-rose-300"
+                      ? "bg-emerald-50 text-emerald-600"
+                      : "bg-rose-50 text-rose-600"
                   }`}
                 >
-                  {sensor.status}
+                  {sensor.status === "online" ? "Online" : "Offline"}
                 </span>
               </div>
-              <div className="mt-3 grid grid-cols-2 gap-2 font-mono text-xs text-slate-300">
+              <div className="mt-4 grid grid-cols-2 gap-x-2 gap-y-3">
                 <div>
-                  <div className="text-[10px] uppercase text-slate-500">Latitude</div>
-                  {sensor.latitude.toFixed(6)}
+                  <div className="text-[10px] font-medium uppercase tracking-wide text-neutral-400">
+                    Latitude
+                  </div>
+                  <div className="font-mono text-[13px] tabular-nums text-neutral-800">
+                    {sensor.latitude.toFixed(6)}
+                  </div>
                 </div>
                 <div>
-                  <div className="text-[10px] uppercase text-slate-500">Longitude</div>
-                  {sensor.longitude.toFixed(6)}
+                  <div className="text-[10px] font-medium uppercase tracking-wide text-neutral-400">
+                    Longitude
+                  </div>
+                  <div className="font-mono text-[13px] tabular-nums text-neutral-800">
+                    {sensor.longitude.toFixed(6)}
+                  </div>
                 </div>
                 <div>
-                  <div className="text-[10px] uppercase text-slate-500">Suhu</div>
-                  {sensor.temperature}&deg;C
+                  <div className="text-[10px] font-medium uppercase tracking-wide text-neutral-400">
+                    Suhu
+                  </div>
+                  <div className="text-[13px] font-medium text-neutral-800">
+                    {sensor.temperature}&deg;C
+                  </div>
                 </div>
                 <div>
-                  <div className="text-[10px] uppercase text-slate-500">Kelembapan</div>
-                  {sensor.humidity}%
+                  <div className="text-[10px] font-medium uppercase tracking-wide text-neutral-400">
+                    Kelembapan
+                  </div>
+                  <div className="text-[13px] font-medium text-neutral-800">{sensor.humidity}%</div>
                 </div>
               </div>
-              <div className="mt-3">
-                <div className="flex justify-between text-[10px] text-slate-500">
+              <div className="mt-4">
+                <div className="flex justify-between text-[10px] font-medium text-neutral-400">
                   <span>Baterai</span>
                   <span>{sensor.battery}%</span>
                 </div>
-                <div className="mt-1 h-1.5 rounded-full bg-slate-800">
+                <div className="mt-1.5 h-1 rounded-full bg-neutral-100">
                   <div
-                    className="h-full rounded-full bg-emerald-400"
+                    className="h-full rounded-full bg-emerald-500 transition-all duration-500"
                     style={{ width: `${sensor.battery}%` }}
                   />
                 </div>
               </div>
             </button>
           ))}
-          <p className="px-1 text-[11px] leading-relaxed text-slate-500">
-            Data saat ini adalah simulasi. Untuk menghubungkan sensor fisik asli (misalnya
-            perangkat GPS/IoT), data dapat dikirim ke server lalu ditampilkan di peta ini.
+          <p className="px-2 text-[11px] leading-relaxed text-neutral-400">
+            Data saat ini adalah simulasi. Hubungkan sensor fisik asli Anda untuk menampilkan data
+            langsung di peta ini.
           </p>
         </aside>
 
-        <section className="relative min-h-[420px] flex-1 overflow-hidden rounded-xl border border-slate-800">
+        <section className="relative min-h-[480px] flex-1 overflow-hidden rounded-3xl bg-white shadow-[0_1px_2px_rgba(0,0,0,0.04)] ring-1 ring-black/5">
           <ClientOnly
             fallback={
-              <div className="flex h-full min-h-[420px] items-center justify-center bg-slate-900 text-sm text-slate-400">
+              <div className="flex h-full min-h-[480px] items-center justify-center text-[13px] text-neutral-400">
                 Memuat peta…
               </div>
             }
           >
             <Suspense
               fallback={
-                <div className="flex h-full min-h-[420px] items-center justify-center bg-slate-900 text-sm text-slate-400">
+                <div className="flex h-full min-h-[480px] items-center justify-center text-[13px] text-neutral-400">
                   Memuat peta…
                 </div>
               }
@@ -137,10 +159,13 @@ function Index() {
             </Suspense>
           </ClientOnly>
           {selected && (
-            <div className="absolute bottom-4 left-4 z-[1000] rounded-lg border border-slate-700 bg-slate-900/90 px-4 py-2 font-mono text-xs text-slate-200 shadow-lg backdrop-blur">
-              <span className="text-slate-400">{selected.name}</span>
-              <br />
-              {selected.latitude.toFixed(6)}, {selected.longitude.toFixed(6)}
+            <div className="absolute bottom-5 left-5 z-[1000] rounded-2xl bg-white/85 px-4 py-3 shadow-[0_4px_20px_rgba(0,0,0,0.08)] ring-1 ring-black/5 backdrop-blur-xl">
+              <div className="text-[12px] font-semibold tracking-tight text-neutral-900">
+                {selected.name}
+              </div>
+              <div className="mt-0.5 font-mono text-[12px] tabular-nums text-neutral-500">
+                {selected.latitude.toFixed(6)}, {selected.longitude.toFixed(6)}
+              </div>
             </div>
           )}
         </section>
