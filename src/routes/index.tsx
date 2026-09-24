@@ -8,13 +8,13 @@ const SensorMap = lazy(() => import("@/components/SensorMap"));
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Peta Sensor — Pemantauan Lokasi Real-time" },
+      { title: "peta sensor - kelompok" },
       {
         name: "description",
         content:
           "Peta interaktif yang menampilkan posisi latitude dan longitude sensor fisik secara real-time.",
       },
-      { property: "og:title", content: "Peta Sensor — Pemantauan Lokasi Real-time" },
+      { property: "og:title", content: "peta sensor - kelompok" },
       {
         property: "og:description",
         content:
@@ -52,7 +52,7 @@ function Index() {
       <header className="sticky top-0 z-[1100] border-b border-black/5 bg-white/70 backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
           <div>
-            <h1 className="text-[17px] font-semibold tracking-tight">Peta Sensor</h1>
+            <h1 className="text-[17px] font-semibold tracking-tight">Peta Sensor - Kelompok</h1>
             <p className="text-[12px] text-neutral-500">
               Lokasi sensor fisik, diperbarui setiap 3 detik
             </p>
