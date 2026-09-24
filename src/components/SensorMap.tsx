@@ -49,9 +49,17 @@ export default function SensorMap({ sensors, selectedId, onSelect }: SensorMapPr
     };
   }, []);
 
+  const hasCenteredRef = useRef(false);
+
   useEffect(() => {
     const map = mapRef.current;
     if (!map) return;
+
+    if (sensors.length > 0 && !hasCenteredRef.current) {
+      map.setView([sensors[0].latitude, sensors[0].longitude], 14);
+      hasCenteredRef.current = true;
+    }
+
     sensors.forEach((sensor) => {
       const latLng: L.LatLngExpression = [sensor.latitude, sensor.longitude];
       const existing = markersRef.current.get(sensor.id);
@@ -59,7 +67,9 @@ export default function SensorMap({ sensors, selectedId, onSelect }: SensorMapPr
         <div style="font-family: sans-serif; font-size: 12px; line-height: 1.5;">
           <strong>${sensor.name}</strong><br/>
           Latitude: ${sensor.latitude.toFixed(6)}<br/>
-          Longitude: ${sensor.longitude.toFixed(6)}
+          Longitude: ${sensor.longitude.toFixed(6)}<br/>
+          ${sensor.speed !== undefined ? `Kecepatan: ${sensor.speed} km/j<br/>` : ""}
+          <span style="color: #666; font-size: 10px;">${new Date(sensor.updatedAt).toLocaleTimeString("id-ID")}</span>
         </div>`;
       if (existing) {
         existing.setLatLng(latLng);
@@ -73,6 +83,7 @@ export default function SensorMap({ sensors, selectedId, onSelect }: SensorMapPr
         markersRef.current.set(sensor.id, marker);
       }
     });
+
     const selected = sensors.find((s) => s.id === selectedId);
     if (selected) {
       map.panTo([selected.latitude, selected.longitude], { animate: true });

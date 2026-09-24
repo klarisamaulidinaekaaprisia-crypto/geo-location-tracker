@@ -3,6 +3,8 @@ export interface SensorReading {
   name: string;
   latitude: number;
   longitude: number;
+  altitude?: number;
+  speed?: number;
   battery: number;
   status: "online" | "offline";
   updatedAt: string;
