@@ -12,7 +12,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Peta interaktif yang menampilkan posisi latitude dan longitude sensor fisik secara real-time, lengkap dengan suhu, kelembapan, dan status baterai.",
+          "Peta interaktif yang menampilkan posisi latitude dan longitude sensor fisik secara real-time.",
       },
       { property: "og:title", content: "Peta Sensor — Pemantauan Lokasi Real-time" },
       {
@@ -88,12 +88,12 @@ function Index() {
                   {sensor.status === "online" ? "Online" : "Offline"}
                 </span>
               </div>
-              <div className="mt-4 grid grid-cols-2 gap-x-2 gap-y-3">
+              <div className="mt-4 grid grid-cols-2 gap-x-3 gap-y-2">
                 <div>
                   <div className="text-[10px] font-medium uppercase tracking-wide text-neutral-400">
                     Latitude
                   </div>
-                  <div className="font-mono text-[13px] tabular-nums text-neutral-800">
+                  <div className="font-mono text-[14px] font-medium tabular-nums text-neutral-800">
                     {sensor.latitude.toFixed(6)}
                   </div>
                 </div>
@@ -101,23 +101,9 @@ function Index() {
                   <div className="text-[10px] font-medium uppercase tracking-wide text-neutral-400">
                     Longitude
                   </div>
-                  <div className="font-mono text-[13px] tabular-nums text-neutral-800">
+                  <div className="font-mono text-[14px] font-medium tabular-nums text-neutral-800">
                     {sensor.longitude.toFixed(6)}
                   </div>
-                </div>
-                <div>
-                  <div className="text-[10px] font-medium uppercase tracking-wide text-neutral-400">
-                    Suhu
-                  </div>
-                  <div className="text-[13px] font-medium text-neutral-800">
-                    {sensor.temperature}&deg;C
-                  </div>
-                </div>
-                <div>
-                  <div className="text-[10px] font-medium uppercase tracking-wide text-neutral-400">
-                    Kelembapan
-                  </div>
-                  <div className="text-[13px] font-medium text-neutral-800">{sensor.humidity}%</div>
                 </div>
               </div>
               <div className="mt-4">
@@ -173,3 +159,4 @@ function Index() {
     </div>
   );
 }
+

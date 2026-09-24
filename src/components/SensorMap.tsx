@@ -56,11 +56,10 @@ export default function SensorMap({ sensors, selectedId, onSelect }: SensorMapPr
       const latLng: L.LatLngExpression = [sensor.latitude, sensor.longitude];
       const existing = markersRef.current.get(sensor.id);
       const popup = `
-        <div style="font-family: sans-serif; font-size: 12px;">
+        <div style="font-family: sans-serif; font-size: 12px; line-height: 1.5;">
           <strong>${sensor.name}</strong><br/>
-          Lat: ${sensor.latitude.toFixed(6)}<br/>
-          Lng: ${sensor.longitude.toFixed(6)}<br/>
-          Suhu: ${sensor.temperature}&deg;C &middot; Kelembapan: ${sensor.humidity}%
+          Latitude: ${sensor.latitude.toFixed(6)}<br/>
+          Longitude: ${sensor.longitude.toFixed(6)}
         </div>`;
       if (existing) {
         existing.setLatLng(latLng);
