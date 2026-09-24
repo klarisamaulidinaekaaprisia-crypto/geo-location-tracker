@@ -16,9 +16,9 @@ function makeIcon(selected: boolean) {
       width: ${selected ? 22 : 16}px;
       height: ${selected ? 22 : 16}px;
       border-radius: 9999px;
-      background: ${selected ? "#38bdf8" : "#34d399"};
-      border: 3px solid #0f172a;
-      box-shadow: 0 0 12px ${selected ? "#38bdf8" : "#34d399"};
+      background: ${selected ? "#007aff" : "#34c759"};
+      border: 3px solid #ffffff;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.25);
     "></div>`,
     iconSize: [selected ? 22 : 16, selected ? 22 : 16],
     iconAnchor: [selected ? 11 : 8, selected ? 11 : 8],
